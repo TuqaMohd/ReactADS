@@ -9,7 +9,7 @@ import {
   type ReactNode
 } from "react";
 import { registerAuthHandlers } from "../shared/api/httpClient";
-import { loginRequest, logoutRequest, refreshRequest, updateProfileRequest } from "../features/auth/api";
+import { logoutRequest, refreshRequest } from "../features/auth/api";
 import { clearSession, loadSession, saveSession } from "../features/auth/session";
 import { createGuestToken, getExpiryTime, isTokenExpired } from "../features/auth/jwt";
 import { permissionsForRoles } from "../features/auth/rbac";
@@ -36,7 +36,7 @@ export interface AuthContextValue {
   login: (credentials: LoginCredentials, rememberMe: boolean) => Promise<void>;
   loginAsGuest: (username: string) => void;
   logout: () => void;
-  updateProfile: (patch: Partial<Pick<AuthUser, "username" | "email">>) => Promise<void>;
+  updateProfile: (patch: Partial<Pick<AuthUser, "username" | "email" | "name" | "bio" | "age" | "gender">>) => Promise<void>;
   hasRole: (role: string) => boolean;
   hasPermission: (permission: string) => boolean;
 }
@@ -166,23 +166,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return clearRefreshTimer;
   }, [session, scheduleRefresh, clearRefreshTimer]);
 
-  const login = useCallback( //login functionality implementation
-    async (credentials: LoginCredentials, rememberMe: boolean) => { 
+  const login = useCallback(
+    async (credentials: LoginCredentials, rememberMe: boolean) => {
       setIsLoading(true);
       setError(null);
 
       try {
-        const response = await loginRequest(credentials);
+        const accessToken = createGuestToken(credentials.username, GUEST_SESSION_TTL_MS);
         persist({
-          accessToken: response.accessToken,
-          refreshToken: response.refreshToken,
-          user: response.user,
+          accessToken,
+          refreshToken: null,
+          user: { id: credentials.username, username: credentials.username, roles: ["user"] },
           storageMode: rememberMe ? "local" : "session"
         });
-      } catch (err) {
-        const message = err instanceof Error ? err.message : "Login failed - please try again.";
-        setError(message);
-        throw err;
       } finally {
         setIsLoading(false);
       }
@@ -212,13 +208,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [endSession]);
 
   const updateProfile = useCallback(
-    async (patch: Partial<Pick<AuthUser, "username" | "email">>) => {
+    async (patch: Partial<Pick<AuthUser, "username" | "email" | "name" | "bio" | "age" | "gender">>) => {
       const current = sessionRef.current;
       if (!current) {
         return;
       }
 
-      const updatedUser = await updateProfileRequest(patch);
+      const updatedUser: AuthUser = { ...current.user, ...patch };
       persist({ ...current, user: updatedUser });
     },
     [persist]

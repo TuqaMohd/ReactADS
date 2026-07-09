@@ -27,7 +27,7 @@ export async function logoutRequest(refreshToken: string): Promise<void> {
 }
 
 export async function updateProfileRequest(
-  patch: Partial<Pick<AuthUser, "username" | "email">>
+  patch: Partial<Pick<AuthUser, "username" | "email" | "name" | "bio" | "age" | "gender">>
 ): Promise<AuthUser> {
   const response = await httpClient.patch<AuthUser>(`${AUTH_BASE_URL}/me`, patch);
   return response.data;

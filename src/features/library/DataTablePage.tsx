@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  DataGrid,
+  DataGrid, //the table component itself.
   type GridColDef, //types the column definitions
   type GridPaginationModel, 
   type GridSortModel //type the pagination and sorting state that get passed back and forth with the grid.

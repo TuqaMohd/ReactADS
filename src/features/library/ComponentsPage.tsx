@@ -75,7 +75,7 @@ export default function ComponentsPage() {
     setSnackbarOpen(true);
   }
 
-  function handleConfirmReset() {
+  function handleConfirmReset() { //rest button settings implementation
     updateSettings({ difficulty: "normal" });
     setDialogOpen(false);
     setSnackbarOpen(true);
