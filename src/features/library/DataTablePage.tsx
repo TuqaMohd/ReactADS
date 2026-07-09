@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   DataGrid,
-  type GridColDef,
-  type GridPaginationModel,
-  type GridSortModel
+  type GridColDef, //types the column definitions
+  type GridPaginationModel, 
+  type GridSortModel //type the pagination and sorting state that get passed back and forth with the grid.
 } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -55,17 +55,17 @@ const columns: GridColDef<Adventurer>[] = [
 ];
 
 export default function DataTablePage() {
-  const [rows, setRows] = useState<Adventurer[]>([]);
+  const [rows, setRows] = useState<Adventurer[]>([]); 
   const [rowCount, setRowCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({ page: 0, pageSize: 10 });
-  const [sortModel, setSortModel] = useState<GridSortModel>([]);
+  const [sortModel, setSortModel] = useState<GridSortModel>([]); //Sorting and filtering implementation
   const [status, setStatus] = useState<AdventurerStatus | "all">("all");
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSearch(searchInput), 300);
+    const timeout = setTimeout(() => setSearch(searchInput), 300); //debounce for search
     return () => clearTimeout(timeout);
   }, [searchInput]);
 
@@ -102,7 +102,7 @@ export default function DataTablePage() {
 
   return (
     <Box>
-      <Typography variant="h5" color="text.primary" gutterBottom sx={{ fontWeight: 700 }}>
+      <Typography variant="h5" gutterBottom sx={{ fontWeight: 700, color: "#2c241b" }}>
         Our Remarkable Learners
       </Typography>
 
@@ -116,16 +116,68 @@ export default function DataTablePage() {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon fontSize="small" />
+                  <SearchIcon fontSize="small" sx={{ color: "#5c3a1e" }}/>
                 </InputAdornment>
               )
             }
           }}
-          sx={{ minWidth: 240 }}
+          sx={{ minWidth: 240,
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: "#adb8be",
+              "& input": {
+                color: "#2c241b",
+                fontWeight: 500
+              },
+              "& input::placeholder": {
+                color: "#6b5637",
+                opacity: 1
+              },
+              "& fieldset": {
+                borderColor: "#8a651f",
+                borderWidth: 1.5
+              },
+              "&:hover fieldset": {
+                borderColor: "#3d2712"
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#1f4d3b",
+                borderWidth: 2
+              }
+            }
+          }}
         />
 
-        <FormControl size="small" sx={{ minWidth: 160 }}>
-          <InputLabel id="status-filter-label">Status</InputLabel>
+        <FormControl size="small"
+        sx={{ 
+          minWidth: 160,
+            "& .MuiInputLabel-root": {
+              color: "#5c3a1e",
+              fontWeight: 500,
+              "&.Mui-focused": {
+                color: "#1f4d3b"
+              }
+            },
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: "#adb8be",
+              color: "#2c241b",
+              "& fieldset": {
+                borderColor: "#8a651f",
+                borderWidth: 1.5
+              },
+              "&:hover fieldset": {
+                borderColor: "#3d2712"
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#1f4d3b",
+                borderWidth: 2
+              }
+            },
+            "& .MuiSelect-icon": {
+              color: "#5c3a1e"
+            }
+          }}
+        >
+          <InputLabel className = "font-bold p-3" id="status-filter-label">Status</InputLabel>
           <Select
             labelId="status-filter-label"
             label="Status"
