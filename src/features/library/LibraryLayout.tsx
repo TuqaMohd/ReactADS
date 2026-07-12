@@ -11,7 +11,7 @@ export default function LibraryLayout() {
     <div>
       <h2 className="font-serif font-bold text-2xl text-emeraldDark mb-1">Component Library</h2>
       <p className="text-ink/70 text-sm mb-4 font-semibold">
-        Below is a library of our most famous travellers who seeked the path of knowledge.
+        Below is a library of our most famous travellers who seeked the path of knowledge (AKA Final Fantasy characters).
       </p>
 
       <div className="flex flex-wrap gap-2 mb-5">

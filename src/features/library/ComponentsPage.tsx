@@ -53,10 +53,10 @@ const topAdventurers = [
 ];
 
 const recentActivity = [
-  { adventurer: "Player 1", action: "Cleared all levels", time: "2 hours ago" },
+  { adventurer: "Player 1", action: "Cleared all levels", time: "1 hour ago" },
   { adventurer: "Tvqa", action: "Trivia demon", time: "5 hours ago" },
   { adventurer: "Player 3", action: "Ongoing winning streak", time: "1 day ago" },
-  { adventurer: "Player 4", action: "Stuck in level 3.. yikes", time: "1 day ago" }
+  { adventurer: "Player 4", action: "Stuck in level 3.. yikes", time: "4 years ago" }
 ];
 
 export default function ComponentsPage() {

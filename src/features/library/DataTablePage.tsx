@@ -204,7 +204,7 @@ export default function DataTablePage() {
           onPaginationModelChange={setPaginationModel}
           sortModel={sortModel}
           onSortModelChange={setSortModel}
-          pageSizeOptions={[10, 25, 50]}
+          pageSizeOptions={[10, 15, 20]} //rows per page
           disableRowSelectionOnClick
           sx={gridSx}
         />

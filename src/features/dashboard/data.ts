@@ -6,7 +6,7 @@ export const comparisons: ComparisonPoint[] = [
     title: "Type System",
     js: "let Tuqa's age = 23;\nage = \"twenty three\";",
     ts: "let Tuqa's age: number = 23;\nage = \"twenty three\"; // error!! wrong!!!!!",
-    note: "In JavaScript, we can change variables whenever we want however we want. On the other hand, once we define a variable in TypeScript, it stays as it is. No. Matter. What."
+    note: "In JavaScript, we can change variables whenever we want however we want. However, once we define a variable in TypeScript, it stays as it is. No. Matter. What."
   },
   {
     id: "execution",

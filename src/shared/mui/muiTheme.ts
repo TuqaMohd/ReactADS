@@ -53,7 +53,7 @@ export function getMuiTheme(mode: AppTheme): Theme {
           }
         }
       },
-      MuiAppBar: {
+      MuiAppBar: { //Customizing component styles: global theme implementaion
         styleOverrides: {
           root: {
             backgroundColor: isDark ? "#1c3128" : palette.emerald,

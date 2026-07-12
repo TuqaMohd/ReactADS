@@ -5,7 +5,7 @@ export interface AppSettings {
 }
 
 export const defaultSettings: AppSettings = {
-  difficulty: "normal",
+  difficulty: "normal"
 };
 
 export type SettingsAction =
