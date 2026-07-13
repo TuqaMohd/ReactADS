@@ -65,7 +65,7 @@ export default function DataTablePage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSearch(searchInput), 300); //debounce for search
+    const timeout = setTimeout(() => setSearch(searchInput), 300); //debounce for search- performance optimization technique that that limits how often a function executes, and delays the execution until some time has passed.
     return () => clearTimeout(timeout);
   }, [searchInput]);
 
@@ -198,7 +198,7 @@ export default function DataTablePage() {
           columns={columns}
           rowCount={rowCount}
           loading={loading}
-          paginationMode="server"
+          paginationMode="server" //req3 - tells DataGrid to not paginate the data itself. This will provide the rows for the current page, and DG will render them+ show the page controls.
           sortingMode="server"
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}

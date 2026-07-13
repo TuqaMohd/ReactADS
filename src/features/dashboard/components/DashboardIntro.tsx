@@ -5,7 +5,7 @@ export default function DashboardIntro() {
       <p className="text-orange-950 text-sm sm:text-base text-center p-2 font-bold">
         TypeScript is JavaScript with types added
         <span className=" block text-orange-950 text-sm sm:text-base text-center font-bold">
-          Click the buttons below to see examples of some the main differences between the two.
+          Select a topic below to view examples of some the main differences between the two
         </span>
       </p>
     </div>
